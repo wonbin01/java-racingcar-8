@@ -16,5 +16,14 @@ public class InputHandler {
         String input = Console.readLine();
         cars = Arrays.asList(ex.delimiter(input));
         ex.validateInput(cars);
+        createRacingCars();
+        System.out.println("시도할 횟수는 몇 회인가요?");
+    }
+
+    private void createRacingCars() {
+        for (String car : cars) {
+            Car carObj = new Car(car);
+            racingCars.add(carObj);
+        }
     }
 }
