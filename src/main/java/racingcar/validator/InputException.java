@@ -26,4 +26,12 @@ public class InputException {
             }
         }
     }
+
+    public void checkEngAndNumber(List<String> cars) {
+        for (String car : cars) {
+            if (!car.matches("[a-zA-Z0-9]+")) {
+                throw new IllegalArgumentException("이릉은 영어와 숫자로만 구성되어야합니다.");
+            }
+        }
+    }
 }

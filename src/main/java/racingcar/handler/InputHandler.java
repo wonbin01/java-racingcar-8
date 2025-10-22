@@ -17,5 +17,6 @@ public class InputHandler {
         cars = Arrays.asList(ex.delimiter(input));
         ex.checkUniqueInput(cars);
         ex.checkInputLength(cars);
+        ex.checkEngAndNumber(cars);
     }
 }
