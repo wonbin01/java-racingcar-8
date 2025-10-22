@@ -41,4 +41,10 @@ public class InputException {
             }
         }
     }
+
+    public void validateInput(List<String> cars) {
+        checkEngAndNumber(cars);
+        checkInputLength(cars);
+        checkUniqueInput(cars);
+    }
 }
