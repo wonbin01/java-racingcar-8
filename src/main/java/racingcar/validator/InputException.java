@@ -11,7 +11,7 @@ public class InputException {
         }
         String[] names = input.split(",");
         for (int i = 0; i < names.length; i++) {
-            names[i] = names[i].trim();
+            names[i] = names[i].trim().replace(" ", "");
             if (names[i].isEmpty()) {
                 throw new IllegalArgumentException("빈 이름은 사용할 수 없습니다.");
             }
