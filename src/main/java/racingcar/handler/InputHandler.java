@@ -16,5 +16,6 @@ public class InputHandler {
         String input = Console.readLine();
         cars = Arrays.asList(ex.delimiter(input));
         ex.checkUniqueInput(cars);
+        ex.checkInputLength(cars);
     }
 }

@@ -18,4 +18,12 @@ public class InputException {
             throw new IllegalArgumentException("중복된 이름이 존재합니다.");
         }
     }
+
+    public void checkInputLength(List<String> cars) {
+        for (String car : cars) {
+            if (car.length() > 5) {
+                throw new IllegalArgumentException("이름은 5자를 초과할 수 없습니다.");
+            }
+        }
+    }
 }
