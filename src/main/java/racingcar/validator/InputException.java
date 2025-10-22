@@ -9,7 +9,14 @@ public class InputException {
         if (input.isEmpty()) {
             throw new IllegalArgumentException("입력이 비어있습니다.");
         }
-        return input.split(",");
+        String[] names = input.split(",");
+        for (int i = 0; i < names.length; i++) {
+            names[i] = names[i].trim();
+            if (names[i].isEmpty()) {
+                throw new IllegalArgumentException("빈 이름은 사용할 수 없습니다.");
+            }
+        }
+        return names;
     }
 
     public void checkUniqueInput(List<String> cars) {
