@@ -9,11 +9,8 @@ public class Racing {
     private final long chance;
     private Long maxDistance = Long.MIN_VALUE;
 
-    public Racing(List<String> carname, long number) {
-        cars = new ArrayList<>();
-        for (String name : carname) {
-            cars.add(new Car(name));
-        }
+    public Racing(List<Car> carList, long number) {
+        cars = carList;
         this.chance = number;
     }
 
@@ -53,7 +50,7 @@ public class Racing {
         return distance.toString();
     }
 
-    public void printWinner() {
+    public String printWinner() {
         findMaxDistance();
         List<String> winners = new ArrayList<>();
         for (Car car : cars) {
@@ -61,7 +58,9 @@ public class Racing {
                 winners.add(car.getCarName());
             }
         }
-        System.out.println("최종 우승자 : " + String.join(", ", winners));
+        String result = "최종 우승자 : " + String.join(", ", winners);
+        System.out.println(result);
+        return result;
     }
 
     private void findMaxDistance() {

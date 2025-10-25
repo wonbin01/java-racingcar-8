@@ -1,13 +1,16 @@
 package racingcar.handler;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import racingcar.entity.Car;
 import racingcar.entity.Racing;
 import racingcar.validator.InputException;
 
 public class InputHandler {
     public List<String> cars;
+    public List<Car> carList = new ArrayList<>();
     InputException ex = new InputException();
     Racing race;
 
@@ -19,8 +22,16 @@ public class InputHandler {
         System.out.println("시도할 횟수는 몇 회인가요?");
         input = Console.readLine();
         Long distance = ex.validateNumbers(input);
-        race = new Racing(cars, distance);
+        createCarList();
+        race = new Racing(carList, distance);
         race.startRace();
+    }
+
+    private void createCarList() {
+        for (String car : cars) {
+            Car carObj = new Car(car);
+            carList.add(carObj);
+        }
     }
 
 
