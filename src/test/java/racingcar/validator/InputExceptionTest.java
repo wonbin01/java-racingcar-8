@@ -47,4 +47,11 @@ public class InputExceptionTest {
                         IllegalArgumentException.class)
                 .hasMessage("이름은 영어와 숫자로만 구성되어야합니다.");
     }
+
+    @Test
+    void validateInput_통합_테스트() {
+        InputException inputException = new InputException();
+        assertThatCode(() ->
+                inputException.validateInput(List.of("pobi", "1pobi", "jun12"))).doesNotThrowAnyException();
+    }
 }
