@@ -38,4 +38,13 @@ public class InputExceptionTest {
                 inputException.checkInputLength(List.of("wonbin", "pobi"))).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이름은 5자를 초과할 수 없습니다.");
     }
+
+    @Test
+    void 입력은_영어와_숫자만_아니면_오류발생() {
+        InputException inputException = new InputException();
+        assertThatThrownBy(() ->
+                inputException.checkEngAndNumber(List.of("원빈", "pobi", "jun"))).isInstanceOf(
+                        IllegalArgumentException.class)
+                .hasMessage("이름은 영어와 숫자로만 구성되어야합니다.");
+    }
 }
