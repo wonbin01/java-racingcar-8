@@ -54,4 +54,11 @@ public class InputExceptionTest {
         assertThatCode(() ->
                 inputException.validateInput(List.of("pobi", "1pobi", "jun12"))).doesNotThrowAnyException();
     }
+
+    @Test
+    void 숫자입력시_빈칸이_주어진_경우_오류발생() {
+        InputException inputException = new InputException();
+        assertThatThrownBy(() -> inputException.validateNumbers("")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("시도 횟수를 입력해야 합니다.");
+    }
 }
