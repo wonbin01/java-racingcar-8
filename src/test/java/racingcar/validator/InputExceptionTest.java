@@ -61,4 +61,11 @@ public class InputExceptionTest {
         assertThatThrownBy(() -> inputException.validateNumbers("")).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("시도 횟수를 입력해야 합니다.");
     }
+
+    @Test
+    void 숫자입력시_1미만의_수가_입력된_경우_오류발생() {
+        InputException inputException = new InputException();
+        assertThatThrownBy(() -> inputException.validateNumbers("-3")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("시도 횟수는 1 이상이어야 합니다.");
+    }
 }
