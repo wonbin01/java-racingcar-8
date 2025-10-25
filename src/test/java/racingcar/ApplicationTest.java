@@ -40,6 +40,14 @@ class ApplicationTest extends NsTest {
                 inputException.delimiter("")).isInstanceOf(IllegalArgumentException.class).hasMessage("입력이 비어있습니다.");
     }
 
+    @Test
+    void 중간에_이름이_비어있으면_오류발생() {
+        InputException inputException = new InputException();
+        assertThatCode(() ->
+                inputException.delimiter("pobi,,jun")).isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("빈 이름은 사용할 수 없습니다.");
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
