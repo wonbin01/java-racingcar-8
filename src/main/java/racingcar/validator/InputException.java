@@ -48,7 +48,7 @@ public class InputException {
         checkUniqueInput(cars);
     }
 
-    public void validateNumbers(String numbers) {
+    public Long validateNumbers(String numbers) {
         if (numbers == null || numbers.trim().isEmpty()) {
             throw new IllegalArgumentException("시도 횟수를 입력해야 합니다.");
         }
@@ -60,14 +60,7 @@ public class InputException {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자를 입력해야 합니다.");
         }
-    }
-
-    public static void numberException(String input) {
-        try {
-            Long temp = Long.parseLong(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("1이상의 입력이 필요합니다.");
-        }
+        return Long.parseLong(numbers);
     }
 
 }
