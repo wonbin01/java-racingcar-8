@@ -2,13 +2,12 @@ package racingcar.entity;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Racing {
-    private List<Car> cars;
-    private long chance;
-    private List<Integer> numbers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+    private final List<Car> cars;
+    private final long chance;
+    private Long maxDistance = Long.MIN_VALUE;
 
     public Racing(List<String> carname, long number) {
         cars = new ArrayList<>();
@@ -23,11 +22,12 @@ public class Racing {
         for (int i = 0; i < chance; i++) {
             raceOnce();
         }
+        printWinner();
     }
 
     public void raceOnce() {
         for (Car car : cars) {
-            int randomNumber = Randoms.pickNumberInList(numbers);
+            int randomNumber = Randoms.pickNumberInRange(0, 9);
             if (randomNumber >= 4) {
                 car.incrementDistance();
             }
@@ -51,6 +51,23 @@ public class Racing {
             distance.append("-");
         }
         return distance.toString();
+    }
+
+    public void printWinner() {
+        findMaxDistance();
+        List<String> winners = new ArrayList<>();
+        for (Car car : cars) {
+            if (car.getDistance() == maxDistance) {
+                winners.add(car.getCarName());
+            }
+        }
+        System.out.println("최종 우승자 : " + String.join(", ", winners));
+    }
+
+    private void findMaxDistance() {
+        for (Car car : cars) {
+            maxDistance = Long.max(maxDistance, car.getDistance());
+        }
     }
 
 }
