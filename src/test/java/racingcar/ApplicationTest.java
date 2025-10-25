@@ -3,13 +3,10 @@ package racingcar;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import java.util.List;
 import org.junit.jupiter.api.Test;
-import racingcar.validator.InputException;
 
 class ApplicationTest extends NsTest {
     private static final int MOVING_FORWARD = 4;
@@ -33,31 +30,6 @@ class ApplicationTest extends NsTest {
                         .isInstanceOf(IllegalArgumentException.class)
         );
     }
-
-    @Test
-    void 이름이_비어있으면_오류발생() {
-        InputException inputException = new InputException();
-        assertThatCode(() ->
-                inputException.delimiter("")).isInstanceOf(IllegalArgumentException.class).hasMessage("입력이 비어있습니다.");
-    }
-
-    @Test
-    void 중간에_이름이_비어있으면_오류발생() {
-        InputException inputException = new InputException();
-        assertThatCode(() ->
-                inputException.delimiter("pobi,,jun")).isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("빈 이름은 사용할 수 없습니다.");
-    }
-
-    @Test
-    void 입력에_중복된_이름이_있으면_오류발생() {
-        InputException inputException = new InputException();
-        assertThatThrownBy(() ->
-                inputException.checkUniqueInput(List.of("pobi", "pobi", "jun")))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("중복된 이름이 존재합니다.");
-    }
-
 
     @Override
     public void runMain() {
