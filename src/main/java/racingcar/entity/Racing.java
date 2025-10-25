@@ -7,10 +7,10 @@ import java.util.List;
 
 public class Racing {
     private List<Car> cars;
-    private int chance;
+    private long chance;
     private List<Integer> numbers = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 
-    public Racing(List<String> carname, int number) {
+    public Racing(List<String> carname, long number) {
         cars = new ArrayList<>();
         for (String name : carname) {
             cars.add(new Car(name));
@@ -32,6 +32,7 @@ public class Racing {
                 car.incrementDistance();
             }
         }
+        printStatus();
     }
 
     public void printStatus() {
@@ -41,7 +42,7 @@ public class Racing {
             String mark = createDistance(distance);
             System.out.println(name + " : " + mark);
         }
-        System.out.println("");
+        System.out.println(" ");
     }
 
     public String createDistance(Long number) {

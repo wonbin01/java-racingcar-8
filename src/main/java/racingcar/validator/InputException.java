@@ -37,7 +37,7 @@ public class InputException {
     public void checkEngAndNumber(List<String> cars) {
         for (String car : cars) {
             if (!car.matches("[a-zA-Z0-9]+")) {
-                throw new IllegalArgumentException("이릉은 영어와 숫자로만 구성되어야합니다.");
+                throw new IllegalArgumentException("이름은 영어와 숫자로만 구성되어야합니다.");
             }
         }
     }
@@ -47,4 +47,27 @@ public class InputException {
         checkInputLength(cars);
         checkUniqueInput(cars);
     }
+
+    public void validateNumbers(String numbers) {
+        if (numbers == null || numbers.trim().isEmpty()) {
+            throw new IllegalArgumentException("시도 횟수를 입력해야 합니다.");
+        }
+        try {
+            long num = Long.parseLong(numbers); // 숫자인지 확인
+            if (num <= 0) {
+                throw new IllegalArgumentException("시도 횟수는 1 이상이어야 합니다.");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해야 합니다.");
+        }
+    }
+
+    public static void numberException(String input) {
+        try {
+            Long temp = Long.parseLong(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("1이상의 입력이 필요합니다.");
+        }
+    }
+
 }

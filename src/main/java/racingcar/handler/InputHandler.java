@@ -1,13 +1,17 @@
 package racingcar.handler;
 
+import static racingcar.validator.InputException.numberException;
+
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
+import racingcar.entity.Racing;
 import racingcar.validator.InputException;
 
 public class InputHandler {
     public List<String> cars;
     InputException ex = new InputException();
+    Racing race;
 
     public void startInput() {
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
@@ -16,6 +20,11 @@ public class InputHandler {
         ex.validateInput(cars);
         System.out.println("시도할 횟수는 몇 회인가요?");
         input = Console.readLine();
+        numberException(input);
+        Long distance = Long.parseLong(input.trim());
+        race = new Racing(cars, distance);
+        race.startRace();
     }
+
 
 }
