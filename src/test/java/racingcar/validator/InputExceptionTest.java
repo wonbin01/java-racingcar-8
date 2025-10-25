@@ -75,4 +75,10 @@ public class InputExceptionTest {
         assertThatThrownBy(() -> inputException.validateNumbers("삼십")).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("숫자를 입력해야 합니다.");
     }
+
+    @Test
+    void 숫자입력시_정상작동_테스트() {
+        InputException inputException = new InputException();
+        assertThatCode(() -> inputException.validateNumbers("32")).doesNotThrowAnyException();
+    }
 }
