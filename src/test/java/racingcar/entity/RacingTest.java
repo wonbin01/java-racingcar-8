@@ -24,4 +24,15 @@ public class RacingTest {
         String result = racing.printWinner();
         assertThat(result).isEqualTo("최종 우승자 : pobi");
     }
+
+    @Test
+    void 최대_거리_확인_테스트() {
+        Car pobi = new Car("pobi");
+        Car woni = new Car("woni");
+        pobi.incrementDistance();
+        pobi.incrementDistance();
+        Racing racing = new Racing(List.of(pobi, woni), 1);
+        racing.printWinner();
+        assertThat(racing.getMaxDistance()).isEqualTo(2L);
+    }
 }

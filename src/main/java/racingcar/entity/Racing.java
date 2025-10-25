@@ -14,6 +14,10 @@ public class Racing {
         this.chance = number;
     }
 
+    public long getMaxDistance() {
+        return maxDistance;
+    }
+
     public void startRace() {
         System.out.println("실행 결과");
         for (int i = 0; i < chance; i++) {
