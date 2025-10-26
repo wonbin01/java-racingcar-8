@@ -57,6 +57,9 @@ public class InputException {
             if (num <= 0) {
                 throw new IllegalArgumentException("시도 횟수는 1 이상이어야 합니다.");
             }
+            if (num > Long.MAX_VALUE) {
+                throw new IllegalArgumentException("최대 시도 횟수를 넘겼습니다.");
+            }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자를 입력해야 합니다.");
         }
