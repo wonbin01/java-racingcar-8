@@ -44,3 +44,60 @@
 | `pobi,woni`      |   `-1`   | 시행 횟수는 1 이상이어야 합니다. |
 | `pobi,woni`      |   `한번`   | 숫자만 입력 가능합니다.       |
 | `포비,우니`          |   `4`    | 이름은 영어와 숫자만 가능합니다.  |
+
+## 테스트
+
+본 프로젝트는 입력 검증 로직(InputException)과 레이싱 로직(Racing)에 대한
+단위 테스트를 JUnit 5와 AssertJ를 사용하여 작성했다.
+
+| 구분                             | 테스트 항목              | 기대 동작 / 예외 메시지            |
+|--------------------------------|---------------------|---------------------------|
+| **자동차 이름 입력 (InputException)** | 이름이 비어있을 때          | `입력이 비어있습니다.`             |
+|                                | 중간에 빈 이름이 존재할 때     | `빈 이름은 사용할 수 없습니다.`       |
+|                                | 중복된 이름이 존재할 때       | `중복된 이름이 존재합니다.`          |
+|                                | 이름이 5자를 초과할 때       | `이름은 5자를 초과할 수 없습니다.`     |
+|                                | 영어/숫자 이외 문자가 포함될 때  | `이름은 영어와 숫자로만 구성되어야합니다.`  |
+|                                | 정상 입력 시             | 예외 없음                     |
+| **시도 횟수 입력 (InputException)**  | 입력이 비었을 때           | `시도 횟수를 입력해야 합니다.`        |
+|                                | 1 미만의 수가 입력된 경우     | `시도 횟수는 1 이상이어야 합니다.`     |
+|                                | `Long` 범위를 초과한 수 입력 | `최대 시도 횟수를 넘겼습니다.`        |
+|                                | 숫자가 아닌 문자가 입력된 경우   | `정수를 입력해야 합니다.`           |
+|                                | 정상 입력 시             | 예외 없음                     |
+| **레이싱 로직 (Racing)**            | 주행 거리만큼 하이픈(`-`) 출력 | 거리=2 → `"--"`             |
+|                                | 최대 거리 자동차 우승자 계산    | `최종 우승자 : pobi`           |
+|                                | 최대 거리 값 검증          | `getMaxDistance()` → `2L` |
+
+### 대표 테스트 코드 예시
+
+```java
+
+@Test
+void 숫자입력시_LONG_이상의_수가_입력된_경우_오류발생() {
+    InputException inputException = new InputException();
+    assertThatThrownBy(() ->
+            inputException.validateNumbers("9223372036854775808"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("최대 시도 횟수를 넘겼습니다.");
+}
+
+@Test
+void 최대_거리_운전자가_우승자로_출력() {
+    Car pobi = new Car("pobi");
+    Car woni = new Car("woni");
+    pobi.incrementDistance();
+    pobi.incrementDistance();
+    Racing racing = new Racing(List.of(pobi, woni), 1);
+
+    String result = racing.printWinner();
+    assertThat(result).isEqualTo("최종 우승자 : pobi");
+}
+```
+
+테스트 실행 방법
+```./gradlew test```
+
+테스트 성공 예시
+
+```BUILD SUCCESSFUL in 15s
+3 actionable tasks: 3 executed
+```
