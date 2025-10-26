@@ -70,6 +70,14 @@ public class InputExceptionTest {
     }
 
     @Test
+    void 숫자입력시_LONG_이상의_수가_입력된_경우_오류발생() {
+        InputException inputException = new InputException();
+        assertThatThrownBy(() -> inputException.validateNumbers("9223372036854775808")).isInstanceOf(
+                        IllegalArgumentException.class)
+                .hasMessage("최대 시도 횟수를 넘겼습니다.");
+    }
+
+    @Test
     void 숫자입력시_숫자가아니라_다른_문자가_입력된_경우_오류발생() {
         InputException inputException = new InputException();
         assertThatThrownBy(() -> inputException.validateNumbers("삼십")).isInstanceOf(IllegalArgumentException.class)
