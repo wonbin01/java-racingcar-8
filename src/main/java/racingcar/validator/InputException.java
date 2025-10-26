@@ -61,7 +61,7 @@ public class InputException {
             if (numbers.matches("\\d+")) { //숫자긴 한데 long의 범위를 넘긴 경우
                 throw new IllegalArgumentException("최대 시도 횟수를 넘겼습니다.");
             }
-            throw new IllegalArgumentException("숫자를 입력해야 합니다.");
+            throw new IllegalArgumentException("정수를 입력해야 합니다.");
         }
         return Long.parseLong(numbers);
     }
